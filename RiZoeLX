@@ -1,0 +1,36 @@
+#!/bin/bash
+
+
+_python_() {
+    python3${pVer%.*} -c "$1"
+}
+
+
+
+_riz_repo () {
+    local rixrepo
+    rixrepo=`echo "aHR0cHM6Ly9naXRodWIuY29tL01yUml6b2VsL1JpWm9lTFhTcGFt" | base64 -d`
+    echo "$rlink"
+}
+
+_riz_zip () {
+    echo "aHR0cHM6Ly9naXRodWIuY29tL01yUml6b2VsL1JpWm9lTFhTcGFtL2FyY2hpdmUvbWFpbi56aXA=" | base64 -d
+}
+
+_starter () {
+    local rizpath
+    rizpath="rizoelxspam.zip"
+    echo "••• Downloading RiZoeL x Spam •••"
+    wget -q $(_riz_zip) -O "$rizpath"
+    RIZPATH=$(zipinfo -1 "$rizpath" | grep -v "/.");
+    unzip -qq "$rizpath"
+    rm -rf "$rizpath"
+    # RIZOELX_
+    cd $RIZPATH
+    # RIZOELX_PLUG
+    python3 ../setup/updater.py ../requirements.txt requirements.txt
+    echo "••• STARTING RiZoeL X Spam •••"
+    python3 -m RiZoeLXSpam
+}
+
+_starter
