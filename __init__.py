@@ -1,1 +1,0 @@
-# RiZoeLXSpam - © TheRiZoeL
